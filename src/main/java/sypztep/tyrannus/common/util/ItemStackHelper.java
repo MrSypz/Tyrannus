@@ -8,14 +8,14 @@ import net.minecraft.nbt.NbtCompound;
 
 public class ItemStackHelper {
     public static NbtCompound getNbtCompound(ItemStack stack, ComponentType<NbtComponent> type) {
-        NbtCompound value = new NbtCompound();
+        NbtCompound value;
         NbtComponent data = stack.getOrDefault(type, NbtComponent.DEFAULT);
         value = data.copyNbt();
         return value;
     }
 
     public static NbtCompound getNbtCompound(ItemStack stack) {
-        NbtCompound value = new NbtCompound();
+        NbtCompound value;
         NbtComponent data = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT);
         value = data.copyNbt();
         return value;
