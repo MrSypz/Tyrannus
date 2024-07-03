@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "tyrannus",
+  "version": "${version}",
+  "name": "Tyrannus API",
+  "description": "API for my other mod",
+  "authors": [
+    "MrSypztep"
+  ],
+  "contact": {
+    "repo": "https://github.com/Mrsypz/Tyrannus"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/tyrannus/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "sypztep.tyrannus.Tyrannus"
+    ]
+  },
+  "mixins": [
+    "tyrannus.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
