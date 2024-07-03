@@ -5,7 +5,6 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import org.jetbrains.annotations.Nullable;
 
 public class ItemStackHelper {
     public static NbtCompound getNbtCompound(ItemStack stack, ComponentType<NbtComponent> type) {
