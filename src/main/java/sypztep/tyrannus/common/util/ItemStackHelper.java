@@ -14,7 +14,7 @@ public class ItemStackHelper {
         return value;
     }
 
-    public NbtCompound getNbtCompound(ItemStack stack) {
+    public static NbtCompound getNbtCompound(ItemStack stack) {
         NbtCompound value = new NbtCompound();
         NbtComponent data = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT);
         value = data.copyNbt();
