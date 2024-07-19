@@ -18,9 +18,6 @@
       "sypztep.tyrannus.Tyrannus"
     ]
   },
-  "mixins": [
-    "tyrannus.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
