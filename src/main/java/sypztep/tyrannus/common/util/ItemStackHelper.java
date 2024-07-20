@@ -6,9 +6,9 @@ import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 
-public class ItemStackHelper {
+public final class ItemStackHelper {
     public static NbtCompound getNbtCompound(ItemStack stack, ComponentType<NbtComponent> type) {
-        NbtComponent data = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT);
+        NbtComponent data = stack.getOrDefault(type, NbtComponent.DEFAULT);
         return data.copyNbt();
     }
     public static NbtCompound getNbtCompound(ItemStack stack) {
