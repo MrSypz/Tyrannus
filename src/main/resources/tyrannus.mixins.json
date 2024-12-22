@@ -6,10 +6,6 @@
   "mixins": [
   ],
   "client": [
-    "scrolltooltip.client.DrawContextMixin",
-    "scrolltooltip.client.HandledScreenMixin",
-    "scrolltooltip.client.MouseMixin",
-    "scrolltooltip.client.ScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
