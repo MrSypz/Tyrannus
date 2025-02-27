@@ -5,47 +5,8 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import sypztep.penomior.client.widget.ListElement;
 
 public final class DrawContextUtils {
-    // Utility method to draw simple text with an optional icon
-    public static void drawTextWithIcon(DrawContext context, TextRenderer textRenderer, ListElement listElement, int x, int y, float scale, float iconscale, int alpha) {
-        final int ICON_SIZE = 16;
-        Text text = listElement.text();
-        Identifier icon = listElement.icon();
-
-        MatrixStack matrixStack = context.getMatrices();
-        matrixStack.push();
-        matrixStack.scale(scale, scale, 1.0F);
-
-        // Calculate position for text considering scaling
-        int textX = (int) (x / scale);
-        int textY = (int) (y / scale);
-
-        // Render icon if present
-        if (icon != null) {
-            matrixStack.push();
-            matrixStack.translate((x - ICON_SIZE) / scale - 10, (y + (textRenderer.fontHeight * scale) / 2 - (float) ICON_SIZE / 2), 0);
-            matrixStack.scale(iconscale, iconscale, 1.0F);
-            context.drawGuiTexture(icon, 0, 0, ICON_SIZE, ICON_SIZE); // Adjust x, y, width, height
-            matrixStack.pop();
-        }
-
-        // Draw text
-        AnimationUtils.drawFadeText(context, textRenderer, text, textX, textY, alpha);
-
-        matrixStack.pop();
-    }
-
-    public static void drawText(DrawContext context, TextRenderer textRenderer, Text text, int x, int y, float scale, int alpha) {
-        MatrixStack matrixStack = context.getMatrices();
-        matrixStack.push();
-        matrixStack.scale(scale, scale, 1.0F);
-        int textX = (int) (x / scale);
-        int textY = (int) (y / scale);
-        AnimationUtils.drawFadeText(context, textRenderer, text, textX, textY, alpha);
-        matrixStack.pop();
-    }
     public static void drawBoldText(DrawContext context, TextRenderer renderer, String string, int i, int j, int color,int bordercolor) {
         context.drawText(renderer, string, i+1, j, bordercolor, false);
         context.drawText(renderer, string, i-1, j, bordercolor, false);
