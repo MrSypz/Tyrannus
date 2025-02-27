@@ -9,6 +9,6 @@ public class Tyrannus implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(MODID);
     @Override
     public void onInitialize() {
-
+        LOGGER.info("Tyrannus initialized!");
     }
 }
