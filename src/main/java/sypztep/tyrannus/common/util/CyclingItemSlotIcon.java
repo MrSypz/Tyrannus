@@ -43,22 +43,7 @@ public final class CyclingItemSlotIcon {
             this.drawItemIcon(this.itemStacks.get(this.currentIndex), f, context, x, y);
         }
     }
-    public void render(ScreenHandler screenHandler, DrawContext context, float delta, float alpha, int x, int y) {
-        Slot slot = screenHandler.getSlot(this.slotId);
-        if (!this.itemStacks.isEmpty() && !slot.hasStack()) {
-            boolean bl = this.itemStacks.size() > 1 && this.timer >= 30;
-            float transitionAlpha = bl ? this.computeAlpha(delta) : 1.0F;
-            float effectiveAlpha = transitionAlpha * alpha;
 
-            if (transitionAlpha < 1.0F) {
-                int i = Math.floorMod(this.currentIndex - 1, this.itemStacks.size());
-                float previousItemAlpha = (1.0F - transitionAlpha) * alpha;
-                this.drawItemIcon(this.itemStacks.get(i), previousItemAlpha, context, x, y);
-            }
-
-            this.drawItemIcon(this.itemStacks.get(this.currentIndex), effectiveAlpha, context, x, y);
-        }
-    }
     private void drawItemIcon(ItemStack itemStack, float alpha, DrawContext context, int x, int y) {
         context.getMatrices().push();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
