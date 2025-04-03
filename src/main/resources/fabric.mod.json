@@ -21,6 +21,9 @@
       "sypztep.tyrannus.TyrannusClient"
     ]
   },
+  "mixins": [
+  "tyrannus.mixins.json"
+],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
