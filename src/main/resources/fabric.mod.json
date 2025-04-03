@@ -16,6 +16,9 @@
   "entrypoints": {
     "main": [
       "sypztep.tyrannus.Tyrannus"
+    ],
+    "client": [
+      "sypztep.tyrannus.TyrannusClient"
     ]
   },
   "depends": {
