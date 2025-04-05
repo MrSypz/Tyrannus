@@ -24,7 +24,7 @@ public class TestScreen extends BaseScreen {
                 .setShadowIntensity(1.0f)      // Drop shadow
                 .setPlaySounds(true, true);    // Enable hover and click sounds
 
-        panels.add(fancyButton);
+        addPanel(fancyButton);
 
         // Create a disabled button
         Button disabledButton = new Button(
@@ -35,7 +35,7 @@ public class TestScreen extends BaseScreen {
         )
                 .setEnabled(false);
 
-        panels.add(disabledButton);
+        addPanel(disabledButton);
 
         // Create a button with an icon
         Button iconButton = new Button(
@@ -46,6 +46,6 @@ public class TestScreen extends BaseScreen {
                 button -> System.out.println("Settings clicked!")
         );
 
-        panels.add(iconButton);
+        addPanel(iconButton);
     }
 }

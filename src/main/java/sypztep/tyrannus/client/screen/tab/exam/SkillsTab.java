@@ -49,8 +49,8 @@ public class SkillsTab extends Tab {
     protected void initPanels() {
         int panelX = 10;
         int panelY = 65; // Below nav bar
-        int panelWidth = parentScreen.width - 20;
-        int panelHeight = parentScreen.height - 100; // Space for nav and bottom UI
+        int panelWidth = parentScreen.getWidth() - 20;
+        int panelHeight = parentScreen.getHeight() - 100; // Space for nav and bottom UI
 
         // Create scrollable skills panel
         skillsPanel = new SkillsScrollPanel(panelX, panelY, panelWidth, panelHeight,
@@ -63,7 +63,7 @@ public class SkillsTab extends Tab {
         // Draw tooltip if hovering over an attribute
         if (hoverTooltip != null) {
             int tooltipWidth = client.textRenderer.getWidth(hoverTooltip);
-            int tooltipX = Math.min(mouseX + 12, parentScreen.width - tooltipWidth - 12);
+            int tooltipX = Math.min(mouseX + 12, parentScreen.getWidth() - tooltipWidth - 12);
             int tooltipY = mouseY + 12;
 
             // Draw tooltip background

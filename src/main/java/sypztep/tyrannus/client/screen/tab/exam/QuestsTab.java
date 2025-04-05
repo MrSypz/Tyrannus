@@ -46,8 +46,8 @@ public class QuestsTab extends Tab {
     protected void initPanels() {
         int panelX = 10;
         int panelY = 65; // Below nav bar
-        int panelWidth = parentScreen.width - 20;
-        int panelHeight = parentScreen.height - 100; // Space for nav and bottom UI
+        int panelWidth = parentScreen.getWidth() - 20;
+        int panelHeight = parentScreen.getHeight() - 100; // Space for nav and bottom UI
 
         // Create quests panel
         questPanel = new QuestPanel(panelX, panelY, panelWidth, panelHeight, Text.of("Quests"));
