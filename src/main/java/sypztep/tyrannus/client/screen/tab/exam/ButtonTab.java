@@ -6,7 +6,7 @@ import sypztep.tyrannus.client.screen.panel.Button;
 import sypztep.tyrannus.client.screen.tab.Tab;
 
 public class ButtonTab extends Tab {
-    public ButtonTab(String id, Text label) {
+    public ButtonTab() {
         super("ButtonTab", Text.literal("Button"));
     }
 
