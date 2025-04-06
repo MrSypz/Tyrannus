@@ -2,6 +2,7 @@ package sypztep.tyrannus.client.screen.tab.exam;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.text.Text;
+import sypztep.tyrannus.client.screen.panel.Button;
 import sypztep.tyrannus.client.screen.panel.ScrollablePanel;
 import sypztep.tyrannus.client.screen.tab.Tab;
 
@@ -60,6 +61,8 @@ public class SkillsTab extends Tab {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.render(context, mouseX, mouseY, delta);
+
         // Draw tooltip if hovering over an attribute
         if (hoverTooltip != null) {
             int tooltipWidth = client.textRenderer.getWidth(hoverTooltip);
@@ -90,6 +93,7 @@ public class SkillsTab extends Tab {
 
             // Here you would normally save the attribute change
             // For now we just update the UI
+            skillsPanel.refreshContent();
         }
     }
 
@@ -97,6 +101,8 @@ public class SkillsTab extends Tab {
      * Custom scrollable panel for skills.
      */
     private class SkillsScrollPanel extends ScrollablePanel {
+        private final Map<String, Button> upgradeButtons = new HashMap<>();
+
         public SkillsScrollPanel(int x, int y, int width, int height, Text title) {
             super(x, y, width, height, title);
             initContent();
@@ -107,6 +113,44 @@ public class SkillsTab extends Tab {
             int headerHeight = 60;
             int contentHeight = headerHeight + (attributes.size() * itemHeight) + 20; // Extra padding
             setContentHeight(contentHeight);
+
+            refreshContent();
+        }
+
+        public void refreshContent() {
+            // Clear existing buttons
+            upgradeButtons.clear();
+
+            // Create new buttons for each attribute
+            int y = 80; // Start of attributes
+            int attributeHeight = 40;
+            int availableWidth = getContentWidth() - (enableScrollbar ? scrollbarWidth + scrollbarPadding + 10 : 5);
+
+            int index = 0;
+            for (Map.Entry<String, SkillAttribute> entry : attributes.entrySet()) {
+                String attrId = entry.getKey();
+
+                // Create a small "+" button
+                int buttonX = getContentX() + availableWidth - 40;
+                int buttonY = getContentY() + y + (index * attributeHeight) + (attributeHeight - 20) / 2;
+
+                Button upgradeButton = new Button(
+                        buttonX,
+                        buttonY,
+                        20,
+                        20,
+                        Text.of("+"),
+                        button -> upgradeAttribute(attrId)
+                );
+
+                // Customize button appearance
+                upgradeButton.setEnabled(availablePoints > 0);
+                upgradeButton.setGlowIntensity(1.5f);
+                upgradeButton.setBounceIntensity(0.8f);
+
+                upgradeButtons.put(attrId, upgradeButton);
+                index++;
+            }
         }
 
         @Override
@@ -193,40 +237,14 @@ public class SkillsTab extends Tab {
                         0xFFFFCC00
                 );
 
-                // Draw upgrade button if points are available
-                int buttonX = x + availableWidth - 40;
-                int buttonY = y + (attributeHeight - 20) / 2;
-
-                if (availablePoints > 0) {
-                    // Button background
-                    context.fill(buttonX, buttonY, buttonX + 20, buttonY + 20, 0xFF444444);
-                    context.fill(buttonX + 1, buttonY + 1, buttonX + 19, buttonY + 19, 0xFF666666);
-
-                    // Plus icon or text
-                        context.drawCenteredTextWithShadow(
-                                textRenderer,
-                                "+",
-                                buttonX + 10,
-                                buttonY + 6,
-                                0xFFFFFFFF
-                        );
-
-                    // Check if mouse is over button
-                    if (mouseX >= buttonX && mouseX <= buttonX + 20 &&
-                            mouseY >= buttonY && mouseY <= buttonY + 20) {
-
-                        // Highlight button
-                        context.fill(buttonX, buttonY, buttonX + 20, buttonY + 20, 0x80FFFFFF);
-
-                        // Set tooltip with attribute description
-                        hoverTooltip = attribute.description;
-
-//                        // Check for click
-//                        if (client.currentScreen.mouseClicked) {
-//                            upgradeAttribute(attrId);
-//                            client.currentScreen.mouseClicked = false;
-//                        }
-                    }
+                // Render upgrade button if points are available
+                Button button = upgradeButtons.get(attrId);
+                if (button != null) {
+                    // Update button position based on scroll position
+                    button.setX(x + availableWidth - 40);
+                    button.setY(y + (attributeHeight - 20) / 2);
+                    button.setEnabled(availablePoints > 0);
+                    button.render(context, mouseX, mouseY, delta);
                 }
 
                 // Check if hovering over attribute name for tooltip
@@ -242,31 +260,16 @@ public class SkillsTab extends Tab {
 
         @Override
         public boolean mouseClicked(double mouseX, double mouseY, int button) {
-            boolean result = super.mouseClicked(mouseX, mouseY, button);
-
-            // Check for clicks on attribute buttons
-            if (button == 0 && availablePoints > 0 && isMouseOver(mouseX, mouseY)) {
-                int y = getContentY() - (int)scrollAmount + 80; // Start of attributes
-                int attributeHeight = 40;
-                int availableWidth = getContentWidth() - (enableScrollbar ? scrollbarWidth + scrollbarPadding + 10 : 5);
-
-                // Check each attribute button
-                int index = 0;
-                for (String attrId : attributes.keySet()) {
-                    int buttonX = getContentX() + availableWidth - 40;
-                    int buttonY = y + (index * attributeHeight) + (attributeHeight - 20) / 2;
-
-                    if (mouseX >= buttonX && mouseX <= buttonX + 20 &&
-                            mouseY >= buttonY && mouseY <= buttonY + 20) {
-                        upgradeAttribute(attrId);
+            // Check if any of our buttons was clicked
+            if (isMouseOver(mouseX, mouseY)) {
+                for (Button upgradeButton : upgradeButtons.values()) {
+                    if (upgradeButton.isEnabled() && upgradeButton.mouseClicked(mouseX, mouseY, button)) {
                         return true;
                     }
-
-                    index++;
                 }
             }
 
-            return result;
+            return super.mouseClicked(mouseX, mouseY, button);
         }
     }
 
