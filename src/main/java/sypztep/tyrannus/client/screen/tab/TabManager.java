@@ -1,7 +1,7 @@
 package sypztep.tyrannus.client.screen.tab;
 
 import net.minecraft.client.gui.DrawContext;
-import sypztep.tyrannus.client.screen.BaseScreen;
+import sypztep.tyrannus.client.screen.base.IScreenBase;
 import sypztep.tyrannus.client.screen.panel.NavBar;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public final class TabManager {
     // The parent screen
-    private final BaseScreen parentScreen;
+    private final IScreenBase screenBase;
 
     // Tab storage
     private final List<Tab> tabs = new ArrayList<>();
@@ -28,8 +28,8 @@ public final class TabManager {
     /**
      * Create a new tab manager.
      */
-    public TabManager(BaseScreen parentScreen) {
-        this.parentScreen = parentScreen;
+    public TabManager(IScreenBase screenBase) {
+        this.screenBase = screenBase;
     }
 
     /**
@@ -42,10 +42,10 @@ public final class TabManager {
         // Add tabs to nav bar
         for (Tab tab : tabs) {
             navBar.addItem(tab.getId(), tab.getLabel(), tab.getIcon(), this::selectTab);
-            tab.init(parentScreen);
+            tab.init(screenBase);
         }
 
-        parentScreen.addPanel(navBar);
+        screenBase.addPanel(navBar);
 
         if (activeTabId == null && !tabs.isEmpty()) {
             selectTab(tabs.getFirst().getId());

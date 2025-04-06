@@ -4,7 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import sypztep.tyrannus.client.screen.BaseScreen;
+import sypztep.tyrannus.client.screen.base.IScreenBase;
 import sypztep.tyrannus.client.screen.panel.UIPanel;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public abstract class Tab {
     protected final List<UIPanel> panels = new ArrayList<>();
 
     // Parent screen reference
-    protected BaseScreen parentScreen;
+    protected IScreenBase parentScreen;
     protected MinecraftClient client;
 
     // Tab state
@@ -50,8 +50,8 @@ public abstract class Tab {
     /**
      * Initialize the tab. Called when the tab is created.
      */
-    public void init(BaseScreen parentScreen) {
-        this.parentScreen = parentScreen;
+    public void init(IScreenBase screenBase) {
+        this.parentScreen = screenBase;
         panels.clear();
         initPanels();
     }
@@ -114,7 +114,7 @@ public abstract class Tab {
      * Add a panel to this tab.
      */
     protected <T extends UIPanel> void addPanel(T panel) {
-        panels.add(panel);
+        addPanel(panel);
         if (isActive && parentScreen != null) {
             parentScreen.addPanel(panel);
         }
