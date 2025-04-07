@@ -226,6 +226,14 @@ public class Button extends UIPanel {
         return false;
     }
 
+    public void setWasHovered(boolean wasHovered) {
+        this.wasHovered = wasHovered;
+    }
+
+    public void setPressed(boolean pressed) {
+        isPressed = pressed;
+    }
+
     // Setter methods for customization
     public Button setEnabled(boolean enabled) {
         this.isEnabled = enabled;
