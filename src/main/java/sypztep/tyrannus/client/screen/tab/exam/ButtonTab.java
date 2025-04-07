@@ -42,7 +42,7 @@ public class ButtonTab extends Tab {
                 parentScreen.width/2 - 60, parentScreen.height/2 + 70,
                 120, 30,
                 Text.literal("Settings"),
-                Identifier.ofVanilla("textures/item/compass_16.png"),
+                Identifier.ofVanilla("icon/info"),
                 button -> System.out.println("Settings clicked!")
         );
 

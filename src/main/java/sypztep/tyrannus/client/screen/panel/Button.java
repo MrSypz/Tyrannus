@@ -267,6 +267,10 @@ public class Button extends UIPanel {
         return this;
     }
 
+    public Consumer<Button> getOnClick() {
+        return onClick;
+    }
+
     public boolean isEnabled() {
         return isEnabled;
     }
