@@ -3,6 +3,7 @@ package sypztep.tyrannus;
 import net.fabricmc.api.ClientModInitializer;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
@@ -14,9 +15,11 @@ public class TyrannusClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ClientTickEvents.END_CLIENT_TICK.register(TyrannusClient::onEndTick);
-
+        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+            ClientTickEvents.END_CLIENT_TICK.register(TyrannusClient::onEndTick);
+        }
     }
+
     private static void onEndTick(MinecraftClient client) {
         if (stats_screen.wasPressed()) client.setScreen(new TestScreen());
     }

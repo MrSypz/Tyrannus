@@ -108,7 +108,6 @@ public class Button extends UIPanel {
     }
 
     private void updateAnimations(float delta) {
-        // Press animation
         if (isPressed) {
             pressAnimation = Math.min(1.0f, pressAnimation + 0.2f);
             scaleAnimation = Math.max(0.95f, 1.0f - (pressAnimation * 0.05f));
@@ -125,7 +124,7 @@ public class Button extends UIPanel {
         }
     }
 
-    private void handleHoverSound() {
+    protected void handleHoverSound() {
         boolean isNowHovered = isHovered && isEnabled;
         if (isNowHovered && !wasHovered && playHoverSound) {
             client.getSoundManager().play(
@@ -135,7 +134,7 @@ public class Button extends UIPanel {
         wasHovered = isNowHovered;
     }
 
-    private void drawRoundedBackground(DrawContext context, int color) {
+    protected void drawRoundedBackground(DrawContext context, int color) {
         // Simple rounded corners implementation
         // Top-left corner
         context.fill(x + cornerRadius, y, x + width - cornerRadius, y + height, color);
