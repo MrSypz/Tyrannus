@@ -263,6 +263,26 @@ public class Button extends UIPanel {
         return isEnabled;
     }
 
+    public boolean isPressed() {
+        return isPressed;
+    }
+
+    public boolean isPlayHoverSound() {
+        return playHoverSound;
+    }
+
+    public boolean isPlayClickSound() {
+        return playClickSound;
+    }
+
+    public boolean isWasHovered() {
+        return wasHovered;
+    }
+
+    public float getPressAnimation() {
+        return pressAnimation;
+    }
+
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
