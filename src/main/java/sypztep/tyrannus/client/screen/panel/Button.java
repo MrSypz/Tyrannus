@@ -240,6 +240,7 @@ public class Button extends UIPanel {
         return this;
     }
 
+
     public Button setPlaySounds(boolean hover, boolean click) {
         this.playHoverSound = hover;
         this.playClickSound = click;
@@ -265,6 +266,10 @@ public class Button extends UIPanel {
     public Button setShadowIntensity(float intensity) {
         this.shadowIntensity = intensity;
         return this;
+    }
+
+    public Consumer<Button> setOnClick(Consumer<Button> click) {
+        return click;
     }
 
     public Consumer<Button> getOnClick() {
