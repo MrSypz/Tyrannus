@@ -1,6 +1,7 @@
 package sypztep.tyrannus.client.screen.panel;
 
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -172,7 +173,7 @@ public class Button extends UIPanel {
 
             // Apply press animation to icon
             iconY += pressAnimation * 1.5f;
-            context.drawGuiTexture(icon, startX, iconY, iconSize, iconSize);
+            context.drawGuiTexture(RenderLayer::getGuiTextured, icon, startX, iconY, iconSize, iconSize);
             textX = startX + iconSize + 5;
         } else {
             textX = x + (width - textWidth) / 2;

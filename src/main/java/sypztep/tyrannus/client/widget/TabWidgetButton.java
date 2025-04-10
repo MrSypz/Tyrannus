@@ -4,6 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.narration.NarrationMessageBuilder;
 import net.minecraft.client.gui.widget.ClickableWidget;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -41,12 +42,12 @@ public abstract class TabWidgetButton extends ClickableWidget {
 
     @Override
     protected void renderWidget(DrawContext context, int mouseX, int mouseY, float delta) {
-        context.drawGuiTexture(buttonTexture, getX() + 4, getY(), getWidth(), getHeight());
-        context.drawGuiTexture(icon, getX() + 13, getY() + 4,18,18);
+        context.drawGuiTexture(RenderLayer::getGuiTextured,buttonTexture, getX() + 4, getY(), getWidth(), getHeight());
+        context.drawGuiTexture(RenderLayer::getGuiTextured,icon, getX() + 13, getY() + 4,18,18);
 
         if (isHovered()) {
-            context.drawGuiTexture(buttonHoverTexture, getX() + 4, getY(), getWidth(), getHeight());
-            context.drawGuiTexture(icon, getX() + 10, getY() + 4,18,18);
+            context.drawGuiTexture(RenderLayer::getGuiTextured,buttonHoverTexture, getX() + 4, getY(), getWidth(), getHeight());
+            context.drawGuiTexture(RenderLayer::getGuiTextured,icon, getX() + 10, getY() + 4,18,18);
 
             boolean isShiftHeld = InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), GLFW.GLFW_KEY_LEFT_SHIFT);
             if (isShiftHeld) renderShiftTooltip(context, mouseX, mouseY);

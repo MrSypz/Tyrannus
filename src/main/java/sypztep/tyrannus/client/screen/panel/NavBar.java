@@ -1,6 +1,7 @@
 package sypztep.tyrannus.client.screen.panel;
 
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -273,7 +274,7 @@ public class NavBar extends UIPanel {
         // Draw icon if available
         if (item.icon != null) {
             int iconY = y + (height - iconSize) / 2;
-            context.drawGuiTexture(item.icon, textX, iconY,  iconSize, iconSize);
+            context.drawGuiTexture(RenderLayer::getGuiTextured,item.icon, textX, iconY,  iconSize, iconSize);
             textX += iconSize + 5;
         }
 
@@ -319,7 +320,7 @@ public class NavBar extends UIPanel {
         // Draw icon if available
         if (item.icon != null) {
             int iconY = y + (height - iconSize) / 2;
-            context.drawTexture(item.icon, currentX, iconY, 0, 0, iconSize, iconSize, iconSize, iconSize);
+            context.drawTexture(RenderLayer::getGuiTextured, item.icon, currentX, iconY, 0, 0, iconSize, iconSize, iconSize, iconSize);
             currentX += iconSize + 5;
         }
 
